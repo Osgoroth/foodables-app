@@ -1,3 +1,6 @@
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c5268286-cbd1-467f-8714-dad33a5858dc/deploy-status)](https://app.netlify.com/sites/beautiful-bombolone-361d85/deploys)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -33,5 +36,3 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c5268286-cbd1-467f-8714-dad33a5858dc/deploy-status)](https://app.netlify.com/sites/beautiful-bombolone-361d85/deploys)
