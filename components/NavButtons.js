@@ -8,8 +8,8 @@ const buttonWidth = "175px";
 
 export default function Navbuttons() {
   return (
-    <Center h="calc(100vh - 75px)">
-      <VStack spacing="0" display={{ md: "none", base: "flex" }}>
+    <Center h="calc(100vh - 75px)" display={{ lg: "none", base: "flex" }}>
+      <VStack spacing="0">
         <Link as={NextLink} _hover={"textDecoration=none"} href="/newrecipe">
           <Button
             h={buttonHeight}
