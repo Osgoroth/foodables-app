@@ -22,7 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { RiCelsiusFill, RiFahrenheitFill } from "react-icons/Ri";
+import { RiCelsiusFill, RiFahrenheitFill } from "react-icons/ri";
 // Font awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEquals } from "@fortawesome/free-solid-svg-icons";
