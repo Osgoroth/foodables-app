@@ -43,7 +43,7 @@ export default function Home() {
               lineHeight={1.2}
               fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })}
             >
-              Your recipes - organsed.
+              Your recipes - organised.
             </Text>
             <Stack display={"row"}>
               <Link
