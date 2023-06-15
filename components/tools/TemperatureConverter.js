@@ -1,19 +1,12 @@
 import {
-  Container,
-  Flex,
   Heading,
-  Input,
   InputGroup,
-  InputRightElement,
-  Icon,
   Text,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  IconButton,
-  VStack,
   InputRightAddon,
   Card,
   CardHeader,
@@ -21,12 +14,8 @@ import {
   CardFooter,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { RiCelsiusFill, RiFahrenheitFill } from "react-icons/ri";
-// Font awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEquals } from "@fortawesome/free-solid-svg-icons";
 
+import { RiCelsiusFill, RiFahrenheitFill } from "react-icons/ri";
 import { celsiusToFahrenheit, fahrenheitToCelsius } from "./converters";
 
 export default function TemperatureConverter() {

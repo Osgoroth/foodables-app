@@ -9,10 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/css-reset": "^2.1.2",
     "@chakra-ui/icons": "^2.0.19",
-    "@chakra-ui/next-js": "^2.1.3",
-    "@chakra-ui/react": "^2.6.1",
-    "@emotion/react": "^11.11.0",
+    "@chakra-ui/next-js": "^2.1.4",
+    "@chakra-ui/react": "^2.7.0",
+    "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
@@ -24,10 +25,10 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "framer-motion": "^10.12.16",
-    "next": "^13.4.4",
+    "next": "^13.4.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.44.2",
+    "react-hook-form": "^7.44.3",
     "react-icons": "^4.9.0"
   },
   "devDependencies": {

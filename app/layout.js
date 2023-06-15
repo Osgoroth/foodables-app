@@ -1,25 +1,21 @@
-// import "./globals.css";
-import { Inter } from "next/font/google";
-import { Providers } from "./Providers";
+"use client";
+
+import { Providers } from "./providers";
 import NavBar from "@/components/NavBar";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
-
-export const metadata = {
-  title: "Foodables",
-  description: "The next(js) recipe app.",
-};
+// export const metadata = {
+//   title: "Foodables",
+//   description: "The next(js) recipe app.",
+// };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en">
       <body>
-        <main>
-          <Providers>
-            <NavBar />
-            {children}
-          </Providers>
-        </main>
+        <Providers>
+          <NavBar />
+          {children}
+        </Providers>
       </body>
     </html>
   );

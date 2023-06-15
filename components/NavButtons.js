@@ -8,8 +8,19 @@ const buttonWidth = "175px";
 
 export default function Navbuttons() {
   return (
-    <Center h="calc(100vh - 75px)" display={{ lg: "none", base: "flex" }}>
-      <VStack spacing="0">
+    <Center
+      h="calc(100vh - 75px)"
+      display={{ lg: "none", base: "flex" }}
+      backgroundImage={
+        "https://images.pexels.com/photos/1414651/pexels-photo-1414651.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1276&dpr=2"
+      }
+      backgroundSize={"cover"}
+      backgroundPosition={"center center"}
+    >
+      <VStack
+        spacing="0"
+        
+      >
         <Link as={NextLink} _hover={"textDecoration=none"} href="/newrecipe">
           <Button
             h={buttonHeight}

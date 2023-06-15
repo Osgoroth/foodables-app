@@ -3,25 +3,12 @@
 import {
   Container,
   Heading,
-  Input,
-  Text,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   Tabs,
   TabList,
   TabPanels,
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTemperatureLow,
-  faWeightHanging,
-} from "@fortawesome/free-solid-svg-icons";
 
 import TemperatureConverter from "@/components/tools/TemperatureConverter";
 import MassConverter from "@/components/tools/MassConverter";

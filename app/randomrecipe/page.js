@@ -1,5 +1,3 @@
-
-
 export default async function RandomRecipe() {
   const res = await fetch(
     "https://www.themealdb.com/api/json/v1/1/random.php",
@@ -8,7 +6,6 @@ export default async function RandomRecipe() {
 
   const data = await res.json();
   const recipe = data.meals[0];
-  return <h1>{recipe.strMeal}</h1>;
-  
+  // {recipe.strMeal}
+  return <h1>Sorry this page is broken</h1>;
 }
-

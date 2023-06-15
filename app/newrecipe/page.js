@@ -1,37 +1,33 @@
 "use client";
-import React from "react";
+
 import ImageUpload from "@/components/recipeform/ImageUpload";
 import { db } from "@/db";
 import { useForm, useFieldArray } from "react-hook-form";
-import useState from "react";
+
 import {
-  Box,
+  Flex,
   Input,
-  Image,
-  InputLeftElement,
   Heading,
-  FormLabel,
   FormControl,
   Container,
   InputGroup,
   Button,
   Textarea,
   FormErrorMessage,
-  Flex,
+  FormLabel,
   Spacer,
   VisuallyHidden,
   useToast,
 } from "@chakra-ui/react";
+
 const IMAGE =
   "https://images.pexels.com/photos/7627422/pexels-photo-7627422.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
 const stepHeight = "80px";
 const buttonWidth = "25px";
+const inputColour = "blackAlpha.300";
 
-export default function Recipe() {
-  // const [url, setUrl] = useState(
-  //   "https://images.pexels.com/photos/7627422/pexels-photo-7627422.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-  // );
+export default function NewRecipe() {
   const toast = useToast();
   const {
     register,
@@ -77,8 +73,6 @@ export default function Recipe() {
         duration: 4500,
         isClosable: true,
       });
-      //reset the fields
-      // alert(`${recipeName} added successfully with id ${id}`);
     } catch (error) {
       toast({
         title: `Failed to add ${recipeName}: ${error}`,
@@ -111,16 +105,16 @@ export default function Recipe() {
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Container maxW="2xl" bg="white" mb={15}>
-        <Heading w="100%" textAlign={"left"} fontWeight="normal" mb="2%">
-          New Recipe
-        </Heading>
+    <Container maxW="2xl" bg="white" mb={15}>
+      <Heading w="100%" textAlign={"left"} fontWeight="normal" mt="2%" mb="2%">
+        New Recipe
+      </Heading>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={errors.name}>
-          {/*  */}
           <ImageUpload onUpload={(url) => setValue("imgUrl", url)} />
           <FormLabel htmlFor="recipeName">Recipe name:</FormLabel>
           <Input
+            borderColor={inputColour}
             id="recipeName"
             placeholder="Egg on toast"
             {...register("recipeName", {
@@ -131,6 +125,8 @@ export default function Recipe() {
           <p>{errors.recipeName?.message}</p>
           <FormLabel htmlFor="description">Description:</FormLabel>
           <Textarea
+            borderColor={inputColour}
+            color={inputColour}
             placeholder="A delicious breakfast"
             id="description"
             {...register("description")}
@@ -147,10 +143,11 @@ export default function Recipe() {
                   <FormLabel htmlFor="amount">Ingredient Amount</FormLabel>
                 </VisuallyHidden>
                 <Input
+                  borderColor={inputColour}
                   id="amount"
-                  {...register(`ingredients.${index}.amount`)}
                   placeholder="amount"
-                  borderRight="none"
+                  {...register(`ingredients.${index}.amount`)}
+                  // placeholder="amount"
                   borderRightRadius="0"
                 ></Input>
 
@@ -158,6 +155,7 @@ export default function Recipe() {
                   <FormLabel htmlFor="name">Ingredient name</FormLabel>
                 </VisuallyHidden>
                 <Input
+                  borderColor={inputColour}
                   id="name"
                   {...register(`ingredients.${index}.name`)}
                   placeholder="name"
@@ -198,6 +196,7 @@ export default function Recipe() {
                 </Flex>
                 {/* TODO: either change the size of the labels to match or make it a fixed size */}
                 <Textarea
+                  borderColor={inputColour}
                   mb={2}
                   type="text"
                   rows="5"
@@ -242,12 +241,12 @@ export default function Recipe() {
               size={"lg"}
               minW={"120px"}
             >
-              Save
+              Save recipe
             </Button>
             <Spacer />
           </Flex>
         </FormControl>
-      </Container>
-    </form>
+      </form>
+    </Container>
   );
 }
