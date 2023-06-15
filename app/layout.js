@@ -1,6 +1,6 @@
 "use client";
 
-import { Providers } from "./providers";
+import { Providers } from "./Providers";
 import NavBar from "@/components/NavBar";
 
 
