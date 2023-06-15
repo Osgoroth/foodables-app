@@ -13,10 +13,12 @@ import {
   MenuItem,
   MenuDivider,
   useDisclosure,
+  useColorMode,
   useColorModeValue,
   Stack,
+  Spacer,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 const Links = [
   { label: "Home", href: "/" },
@@ -42,10 +44,10 @@ const NavLink = ({ label, href }) => (
 // https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9
 export default function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box bg={useColorModeValue("gray.200", "gray.600")} px={4}>
         <Flex h={"75px"} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
@@ -55,11 +57,12 @@ export default function NavBar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Box>Foodables</Box>
+            <Box color={useColorModeValue("black", "white")}>Foodables</Box>
             <HStack
               as={"nav"}
               spacing={4}
               display={{ base: "none", md: "flex" }}
+              color={useColorModeValue("black", "white")}
             >
               {Links.map((link) => (
                 <NavLink key={link.label} label={link.label} href={link.href} />
@@ -67,6 +70,10 @@ export default function NavBar() {
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
+            <Button onClick={toggleColorMode} mr={4}>
+              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+            </Button>
+
             <Menu>
               <MenuButton
                 as={Button}

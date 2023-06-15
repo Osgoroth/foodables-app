@@ -4,20 +4,14 @@ import { useLiveQuery } from "dexie-react-hooks";
 import {
   Box,
   Container,
-  Divider,
   Heading,
-  AbsoluteCenter,
   Text,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
   Image,
+  Grid,
+  GridItem,
+  UnorderedList,
+  OrderedList,
+  List,
 } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
 const IMAGE =
@@ -39,42 +33,68 @@ export default function ViewRecipe() {
 
 function Recipe(recipe) {
   return (
-    <Container>
+    <Container my={"2.5%"}>
       {recipe?.map((result) => (
-        <Box key={result.id} position={"relative"}>
-          <Image
-            src={result.imgUrl}
-            fill={true}
-            width="120px"
-            height="150px"
-            alt="recipe image"
-            borderRadius={10}
-            objectFit="cover"
-          />
-          <Heading as="h1" size="2xl">
-            {result.recipeName}
-          </Heading>
-          <Heading as="h2" size="lg">
-            Description
-          </Heading>
-          <Text>{result.description}</Text>
-          <Heading as="h2" size="lg">
-            Ingredients:
-          </Heading>
-          <ul>
-            {result.ingredients.map((ingredient) => (
-              <Ingredient key={ingredient.name} ingredient={ingredient} />
-            ))}
-          </ul>
-          <Heading as="h2" size="lg">
-            Method:
-          </Heading>
-          <ul>
-            {result.method.map((method, index) => (
-              <Method key={index} method={method} index={index} />
-            ))}
-          </ul>
-        </Box>
+        <Grid
+          key={result.id}
+          templateColumns="repeat(2, 1fr"
+          columnGap={6}
+          rowGap={3}
+          bg="gray.100"
+        >
+          <GridItem colSpan={1} justifySelf={"left"}>
+            <Image
+              src={result.imgUrl}
+              fill={true}
+              width="120px"
+              height="150px"
+              alt="recipe image"
+              borderRadius={10}
+              objectFit="cover"
+            />
+          </GridItem>
+
+          <GridItem colSpan={1} textAlign="left" alignSelf={"center"}>
+            <Heading as="h1" size="2xl">
+              {result.recipeName}
+            </Heading>
+          </GridItem>
+
+          <GridItem colSpan={2}>
+            <Heading as="h2" size="lg" borderBottom={"3px solid"}>
+              Description
+            </Heading>
+
+            <Text>
+              {(result.description == "") | null
+                ? "Oops, no description!"
+                : result.description}
+            </Text>
+          </GridItem>
+
+          <GridItem colSpan={2}>
+            <Heading as="h2" size="lg" borderBottom={"3px solid"}>
+              Ingredients:
+            </Heading>
+            <UnorderedList>
+              {result.ingredients.map((ingredient) => (
+                <Ingredient key={ingredient.name} ingredient={ingredient} />
+              ))}
+            </UnorderedList>
+          </GridItem>
+
+          <GridItem colSpan={2}>
+            <Heading as="h2" size="lg" borderBottom={"3px solid"}>
+              Method:
+            </Heading>
+
+            <List>
+              {result.method.map((method, index) => (
+                <Method key={index} method={method} index={index} />
+              ))}
+            </List>
+          </GridItem>
+        </Grid>
       ))}
     </Container>
   );
