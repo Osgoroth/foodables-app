@@ -3,7 +3,6 @@
 import { Providers } from "./Providers";
 import NavBar from "@/components/NavBar";
 
-
 // export const metadata = {
 //   title: "Foodables",
 //   description: "The next(js) recipe app.",
