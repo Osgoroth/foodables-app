@@ -25,7 +25,6 @@ const IMAGE =
 
 const stepHeight = "80px";
 const buttonWidth = "25px";
-const inputColour = "blackAlpha.300";
 
 export default function NewRecipe() {
   const toast = useToast();
@@ -114,7 +113,6 @@ export default function NewRecipe() {
           <ImageUpload onUpload={(url) => setValue("imgUrl", url)} />
           <FormLabel htmlFor="recipeName">Recipe name:</FormLabel>
           <Input
-            borderColor={inputColour}
             id="recipeName"
             placeholder="Egg on toast"
             {...register("recipeName", {
@@ -125,8 +123,6 @@ export default function NewRecipe() {
           <p>{errors.recipeName?.message}</p>
           <FormLabel htmlFor="description">Description:</FormLabel>
           <Textarea
-            borderColor={inputColour}
-            color={inputColour}
             placeholder="A delicious breakfast"
             id="description"
             {...register("description")}
@@ -143,7 +139,6 @@ export default function NewRecipe() {
                   <FormLabel htmlFor="amount">Ingredient Amount</FormLabel>
                 </VisuallyHidden>
                 <Input
-                  borderColor={inputColour}
                   id="amount"
                   placeholder="amount"
                   {...register(`ingredients.${index}.amount`)}
@@ -155,7 +150,6 @@ export default function NewRecipe() {
                   <FormLabel htmlFor="name">Ingredient name</FormLabel>
                 </VisuallyHidden>
                 <Input
-                  borderColor={inputColour}
                   id="name"
                   {...register(`ingredients.${index}.name`)}
                   placeholder="name"
@@ -196,7 +190,6 @@ export default function NewRecipe() {
                 </Flex>
                 {/* TODO: either change the size of the labels to match or make it a fixed size */}
                 <Textarea
-                  borderColor={inputColour}
                   mb={2}
                   type="text"
                   rows="5"
