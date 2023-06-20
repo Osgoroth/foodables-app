@@ -2,7 +2,7 @@
 
 import ImageUpload from "@/components/recipeform/ImageUpload";
 import { db } from "@/db";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 
 import {
   Flex,
@@ -18,6 +18,20 @@ import {
   Spacer,
   VisuallyHidden,
   useToast,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  HStack,
+  Stack,
+  Select,
+  VStack,
 } from "@chakra-ui/react";
 
 const IMAGE =
@@ -27,6 +41,9 @@ const stepHeight = "80px";
 const buttonWidth = "25px";
 
 export default function NewRecipe() {
+  const hourFormat = (val) => val + `h`;
+  const minuteFormat = (val) => val + `m`;
+
   const toast = useToast();
   const {
     register,
@@ -40,7 +57,9 @@ export default function NewRecipe() {
       imgUrl: IMAGE,
       name: "",
       description: "",
-      category: "",
+      recipeDuration: { minutes: 10, hours: 0 },
+      mealType: "",
+      servings: 2,
       region: "",
       ingredients: [{ amount: "", unit: "", name: "" }],
       method: [{ step: "" }],
@@ -53,6 +72,9 @@ export default function NewRecipe() {
     imgUrl,
     recipeName,
     description,
+    recipeDuration,
+    mealType,
+    servings,
     ingredients,
     method,
   }) {
@@ -60,6 +82,9 @@ export default function NewRecipe() {
       const id = await db.recipes.add({
         imgUrl: imgUrl,
         recipeName: recipeName,
+        recipeDuration: recipeDuration,
+        mealType: mealType,
+        servings: servings,
         description: description,
         ingredients: ingredients,
         method: method,
@@ -103,8 +128,10 @@ export default function NewRecipe() {
     },
   });
 
+  const mealTypes = ["Breakfast", "Lunch", "Dinner", "Snack", "Drink", "Misc"];
+
   return (
-    <Container maxW="2xl" bg="white" mb={15}>
+    <Container maxW="2xl" mb={15}>
       <Heading w="100%" textAlign={"left"} fontWeight="normal" mt="2%" mb="2%">
         New Recipe
       </Heading>
@@ -113,6 +140,7 @@ export default function NewRecipe() {
           <ImageUpload onUpload={(url) => setValue("imgUrl", url)} />
           <FormLabel htmlFor="recipeName">Recipe name:</FormLabel>
           <Input
+            mb={15}
             id="recipeName"
             placeholder="Egg on toast"
             {...register("recipeName", {
@@ -121,6 +149,93 @@ export default function NewRecipe() {
             })}
           />
           <p>{errors.recipeName?.message}</p>
+
+          {/* Duration / Serving size / Mealtype */}
+
+          <Stack direction={["column", "row"]} justify={"space-between"}>
+            <Stack direction={["row", "column"]} spacing={0}>
+              <FormLabel htmlFor="recipeDuration">Duration:</FormLabel>
+              <Controller
+                name="recipeDuration.minutes"
+                control={control}
+                render={({ field }) => (
+                  <NumberInput
+                    // {...register(`recipeDuration.minutes`)}
+                    size="sm"
+                    max={60}
+                    min={1}
+                    defaultValue={10}
+                    id="minutes"
+                    w={20}
+                  >
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                )}
+              />
+              <Controller
+                name="recipeDuration.hours"
+                control={control}
+                render={({ field }) => (
+                  <NumberInput
+                    id="hours"
+                    size="sm"
+                    max={48}
+                    min={1}
+                    defaultValue={1}
+                    w={20}
+                  >
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                )}
+              />
+            </Stack>
+            <Stack direction={["row", "column"]} spacing={0}>
+              <FormLabel htmlFor="mealType">Meal:</FormLabel>
+              <Select
+                size="sm"
+                id="mealType"
+                placeholder="Select option"
+                w={150}
+                {...register("mealType")}
+              >
+                {mealTypes.map((type) => (
+                  <option value={type}>{type}</option>
+                ))}
+              </Select>
+            </Stack>
+            <Stack direction={["row", "column"]} spacing={0}>
+              <FormLabel htmlFor="servings">Servings:</FormLabel>
+              <Controller
+                name="servings"
+                control={control}
+                render={({ field }) => (
+                  <NumberInput
+                    size="sm"
+                    id="servings"
+                    max={15}
+                    min={1}
+                    defaultValue={2}
+                    w={20}
+                  >
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                )}
+              />
+            </Stack>
+          </Stack>
+
           <FormLabel htmlFor="description">Description:</FormLabel>
           <Textarea
             placeholder="A delicious breakfast"
@@ -180,15 +295,14 @@ export default function NewRecipe() {
                 <Flex
                   w={"100px"}
                   h={stepHeight}
-                  bg={"gray.100"}
+                  bg={["gray.100", "gray.400"]}
                   borderLeftRadius={5}
-                  align="center"
                   justify={"center"}
+                  align={"center"}
                 >
-                  <FormLabel>{index + 1}</FormLabel>
-                  {/* TODO: make the tesxt centered */}
+                  <FormLabel m={0}>{index + 1}</FormLabel>
                 </Flex>
-                {/* TODO: either change the size of the labels to match or make it a fixed size */}
+
                 <Textarea
                   mb={2}
                   type="text"
