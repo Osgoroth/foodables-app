@@ -10,7 +10,15 @@ const config = {
   useSystemColorMode: false,
 };
 
+const globals = {
+  styles: {
+    global: {
+      
+    },
+  },
+};
+
 // 3. extend the theme
-const theme = extendTheme({ config });
+const theme = extendTheme({ config }, { globals });
 
 export default theme;

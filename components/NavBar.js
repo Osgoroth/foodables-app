@@ -16,15 +16,17 @@ import {
   useColorMode,
   useColorModeValue,
   Stack,
-  Spacer,
 } from "@chakra-ui/react";
+
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 const Links = [
   { label: "Home", href: "/" },
   { label: "Recipes", href: "/recipes" },
-  { label: "New Recipe", href: "/newrecipe" },
-  { label: "Random Recipe", href: "/randomrecipe" },
+  // { label: "Plan", href: "/plan" },
+  // { label: "New Recipe", href: "/newrecipe" },
+  // { label: "Random Recipe", href: "/randomrecipe" },
+  // { label: "Random Recipe", href: "/randomrecipe" },
 ];
 
 const NavLink = ({ label, href }) => (
@@ -57,7 +59,9 @@ export default function NavBar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Box color={useColorModeValue("black", "white")}>Foodables</Box>
+            <Box color={useColorModeValue("black", "white")}>
+              <NavLink label="Foodables" href="/" />
+            </Box>
             <HStack
               as={"nav"}
               spacing={4}

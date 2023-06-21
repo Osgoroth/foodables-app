@@ -32,6 +32,8 @@ import {
   Stack,
   Select,
   VStack,
+  useColorModeValue,
+  InputRightAddon,
 } from "@chakra-ui/react";
 
 const IMAGE =
@@ -44,7 +46,11 @@ export default function NewRecipe() {
   const hourFormat = (val) => val + `h`;
   const minuteFormat = (val) => val + `m`;
 
+  const redTheme = useColorModeValue("red.600", "red.400");
+  const greenTheme = ["green.600", "green.500"];
+  const mealTypes = ["Breakfast", "Lunch", "Dinner", "Snack", "Drink", "Misc"];
   const toast = useToast();
+
   const {
     register,
     handleSubmit,
@@ -128,8 +134,6 @@ export default function NewRecipe() {
     },
   });
 
-  const mealTypes = ["Breakfast", "Lunch", "Dinner", "Snack", "Drink", "Misc"];
-
   return (
     <Container maxW="2xl" mb={15}>
       <Heading w="100%" textAlign={"left"} fontWeight="normal" mt="2%" mb="2%">
@@ -141,6 +145,7 @@ export default function NewRecipe() {
           <FormLabel htmlFor="recipeName">Recipe name:</FormLabel>
           <Input
             mb={15}
+            maxLength={75}
             id="recipeName"
             placeholder="Egg on toast"
             {...register("recipeName", {
@@ -155,52 +160,34 @@ export default function NewRecipe() {
           <Stack direction={["column", "row"]} justify={"space-between"}>
             <Stack direction={["row", "column"]} spacing={0}>
               <FormLabel htmlFor="recipeDuration">Duration:</FormLabel>
-              <Controller
-                name="recipeDuration.minutes"
-                control={control}
-                render={({ field }) => (
-                  <NumberInput
-                    // {...register(`recipeDuration.minutes`)}
-                    size="sm"
-                    max={60}
-                    min={1}
-                    defaultValue={10}
-                    id="minutes"
-                    w={20}
-                  >
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
-                )}
-              />
-              <Controller
-                name="recipeDuration.hours"
-                control={control}
-                render={({ field }) => (
-                  <NumberInput
-                    id="hours"
-                    size="sm"
-                    max={48}
-                    min={1}
-                    defaultValue={1}
-                    w={20}
-                  >
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
-                )}
-              />
+              <InputGroup size={["xs", "sm"]} mb={2} id="recipeDuration">
+                <Input
+                  maxLength={2}
+                  type="mumber"
+                  id="hours"
+                  min={0}
+                  max={99}
+                  {...register("recipeDuration.hours")}
+                />
+                <InputRightAddon children="hours" borderRadius={0} />
+
+                <Input
+                  maxLength={2}
+                  type="mumber"
+                  borderLeftRadius={0}
+                  id="minutes"
+                  min={0}
+                  max={60}
+                  {...register("recipeDuration.minutes")}
+                />
+                <InputRightAddon children="min" />
+              </InputGroup>
             </Stack>
+
             <Stack direction={["row", "column"]} spacing={0}>
               <FormLabel htmlFor="mealType">Meal:</FormLabel>
               <Select
-                size="sm"
+                size={["xs", "sm"]}
                 id="mealType"
                 placeholder="Select option"
                 w={150}
@@ -240,6 +227,8 @@ export default function NewRecipe() {
           <Textarea
             placeholder="A delicious breakfast"
             id="description"
+            resize={"none"}
+            maxLength={200}
             {...register("description")}
           />
           {/* Ingredients */}
@@ -256,6 +245,7 @@ export default function NewRecipe() {
                 <Input
                   id="amount"
                   placeholder="amount"
+                  maxLength={25}
                   {...register(`ingredients.${index}.amount`)}
                   // placeholder="amount"
                   borderRightRadius="0"
@@ -266,12 +256,18 @@ export default function NewRecipe() {
                 </VisuallyHidden>
                 <Input
                   id="name"
+                  maxLength={25}
                   {...register(`ingredients.${index}.name`)}
                   placeholder="name"
                   borderLeftRadius="0"
                 ></Input>
 
-                <Button ml={2} onClick={() => remove(index)} colorScheme="red">
+                <Button
+                  ml={2}
+                  onClick={() => remove(index)}
+                  bg={redTheme}
+                  color={"white"}
+                >
                   -
                 </Button>
               </InputGroup>
@@ -281,7 +277,8 @@ export default function NewRecipe() {
             <Spacer />
             <Button
               onClick={() => append({ amount: "", unit: "", name: "" })}
-              colorScheme="green"
+              bg={greenTheme}
+              color={"white"}
               w={buttonWidth}
             >
               +
@@ -308,6 +305,7 @@ export default function NewRecipe() {
                   type="text"
                   rows="5"
                   resize={"none"}
+                  maxLength={200}
                   h={stepHeight}
                   {...register(`method.${index}.step`)}
                   borderRadius="0"
@@ -317,7 +315,8 @@ export default function NewRecipe() {
                   h={stepHeight}
                   w={buttonWidth}
                   onClick={() => methodRemove(index)}
-                  colorScheme="red"
+                  bg={redTheme}
+                  color={"white"}
                 >
                   -
                 </Button>
@@ -328,7 +327,8 @@ export default function NewRecipe() {
             <Spacer />
             <Button
               onClick={() => methodAppend()}
-              colorScheme="green"
+              bg={greenTheme}
+              color={"white"}
               w={buttonWidth}
             >
               +

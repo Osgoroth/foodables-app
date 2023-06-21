@@ -14,6 +14,8 @@ import {
   List,
 } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
+
+// TODO: make the text wrap
 const IMAGE =
   "https://images.pexels.com/photos/7627422/pexels-photo-7627422.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 export default function ViewRecipe() {
@@ -37,16 +39,16 @@ function Recipe(recipe) {
       {recipe?.map((result) => (
         <Grid
           key={result.id}
-          templateColumns="repeat(2, 1fr"
+          templateColumns="repeat(5, 1fr)"
+          templateRows="repeat(4, minContent)"
           columnGap={6}
           rowGap={3}
-          bg="gray.100"
         >
-          <GridItem colSpan={1} justifySelf={"left"}>
+          <GridItem colSpan={{ base: 5, md: 2 }} justifySelf={"left"}>
             <Image
               src={result.imgUrl}
               fill={true}
-              width="120px"
+              width="150px"
               height="150px"
               alt="recipe image"
               borderRadius={10}
@@ -54,14 +56,14 @@ function Recipe(recipe) {
             />
           </GridItem>
 
-          <GridItem colSpan={1} textAlign="left" alignSelf={"center"}>
-            <Heading as="h1" size="2xl">
+          <GridItem colSpan={{ base: 5, md: 3 }} textAlign="left">
+            <Heading as="h2" size="xl">
               {result.recipeName}
             </Heading>
           </GridItem>
 
-          <GridItem colSpan={2}>
-            <Heading as="h2" size="lg" borderBottom={"3px solid"}>
+          <GridItem colSpan={5}>
+            <Heading as="h1" size="lg" borderBottom={"3px solid"}>
               Description
             </Heading>
 
@@ -72,7 +74,7 @@ function Recipe(recipe) {
             </Text>
           </GridItem>
 
-          <GridItem colSpan={2}>
+          <GridItem colSpan={5}>
             <Heading as="h2" size="lg" borderBottom={"3px solid"}>
               Ingredients:
             </Heading>
@@ -83,7 +85,7 @@ function Recipe(recipe) {
             </UnorderedList>
           </GridItem>
 
-          <GridItem colSpan={2}>
+          <GridItem colSpan={5}>
             <Heading as="h2" size="lg" borderBottom={"3px solid"}>
               Method:
             </Heading>
