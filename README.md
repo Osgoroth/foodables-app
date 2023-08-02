@@ -1,5 +1,9 @@
 
+
+#  Foodables - recipe app
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c5268286-cbd1-467f-8714-dad33a5858dc/deploy-status)](https://app.netlify.com/sites/beautiful-bombolone-361d85/deploys)
+
+![foodables](https://github.com/Osgoroth/foodables-app/assets/46662617/95bdcca9-fec3-4f5d-8e6b-6520436256fb)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
