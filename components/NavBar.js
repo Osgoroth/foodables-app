@@ -86,7 +86,8 @@ export default function NavBar() {
                 cursor={"pointer"}
                 minW={0}
               >
-                <Avatar size={"sm"} src={"https://placekitten.com/408/100"} />
+                <Avatar size={"sm"} src={""} />
+                {/* https://placekitten.com/408/100 */}
               </MenuButton>
               <MenuList>
                 <Link href="/converters">

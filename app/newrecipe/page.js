@@ -2,6 +2,7 @@
 
 import ImageUpload from "@/components/recipeform/ImageUpload";
 import { db } from "@/db";
+import { useRouter } from "next/navigation";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 
 import {
@@ -18,20 +19,13 @@ import {
   Spacer,
   VisuallyHidden,
   useToast,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  SliderMark,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  HStack,
   Stack,
   Select,
-  VStack,
   useColorModeValue,
   InputRightAddon,
 } from "@chakra-ui/react";
@@ -43,6 +37,8 @@ const stepHeight = "80px";
 const buttonWidth = "25px";
 
 export default function NewRecipe() {
+  const router = useRouter();
+
   const hourFormat = (val) => val + `h`;
   const minuteFormat = (val) => val + `m`;
 
@@ -103,6 +99,7 @@ export default function NewRecipe() {
         duration: 4500,
         isClosable: true,
       });
+      router.push("/recipes");
     } catch (error) {
       toast({
         title: `Failed to add ${recipeName}: ${error}`,
@@ -162,27 +159,25 @@ export default function NewRecipe() {
               <FormLabel htmlFor="recipeDuration">Duration:</FormLabel>
               <InputGroup size={["xs", "sm"]} mb={2} id="recipeDuration">
                 <Input
-                  maxLength={2}
-                  type="mumber"
-                  id="hours"
-                  min={0}
-                  max={99}
-                  {...register("recipeDuration.hours")}
+                  type="number"
+                  {...register("recipeDuration.hours", {
+                    min: 0,
+                    max: { value: 99, message: "Max length is 99 hours." },
+                  })}
                 />
                 <InputRightAddon children="hours" borderRadius={0} />
 
                 <Input
-                  maxLength={2}
-                  type="mumber"
-                  borderLeftRadius={0}
-                  id="minutes"
-                  min={0}
-                  max={60}
-                  {...register("recipeDuration.minutes")}
+                  type="number"
+                  {...register("recipeDuration.minutes", {
+                    min: 0,
+                    max: { value: 60, message: "Max length in minutes is 60." },
+                  })}
                 />
                 <InputRightAddon children="min" />
               </InputGroup>
             </Stack>
+            <p>{errors.recipeDuration?.message}</p>
 
             <Stack direction={["row", "column"]} spacing={0}>
               <FormLabel htmlFor="mealType">Meal:</FormLabel>
