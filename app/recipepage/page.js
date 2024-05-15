@@ -14,6 +14,7 @@ import {
   List,
 } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 // TODO: make the text wrap
 const IMAGE =
@@ -35,70 +36,72 @@ export default function ViewRecipe() {
 
 function Recipe(recipe) {
   return (
-    <Container my={"2.5%"}>
-      {recipe?.map((result) => (
-        <Grid
-          key={result.id}
-          templateColumns="repeat(5, 1fr)"
-          templateRows="repeat(4, minContent)"
-          columnGap={6}
-          rowGap={3}
-        >
-          <GridItem colSpan={{ base: 5, md: 2 }} justifySelf={"left"}>
-            <Image
-              src={result.imgUrl}
-              fill={true}
-              width="150px"
-              height="150px"
-              alt="recipe image"
-              borderRadius={10}
-              objectFit="cover"
-            />
-          </GridItem>
+    <Suspense>
+      <Container my={"2.5%"}>
+        {recipe?.map((result) => (
+          <Grid
+            key={result.id}
+            templateColumns="repeat(5, 1fr)"
+            templateRows="repeat(4, minContent)"
+            columnGap={6}
+            rowGap={3}
+          >
+            <GridItem colSpan={{ base: 5, md: 2 }} justifySelf={"left"}>
+              <Image
+                src={result.imgUrl}
+                fill={true}
+                width="150px"
+                height="150px"
+                alt="recipe image"
+                borderRadius={10}
+                objectFit="cover"
+              />
+            </GridItem>
 
-          <GridItem colSpan={{ base: 5, md: 3 }} textAlign="left">
-            <Heading as="h2" size="xl">
-              {result.recipeName}
-            </Heading>
-          </GridItem>
+            <GridItem colSpan={{ base: 5, md: 3 }} textAlign="left">
+              <Heading as="h2" size="xl">
+                {result.recipeName}
+              </Heading>
+            </GridItem>
 
-          <GridItem colSpan={5}>
-            <Heading as="h1" size="lg" borderBottom={"3px solid"}>
-              Description
-            </Heading>
+            <GridItem colSpan={5}>
+              <Heading as="h1" size="lg" borderBottom={"3px solid"}>
+                Description
+              </Heading>
 
-            <Text>
-              {(result.description == "") | null
-                ? "Oops, no description!"
-                : result.description}
-            </Text>
-          </GridItem>
+              <Text>
+                {(result.description == "") | null
+                  ? "Oops, no description!"
+                  : result.description}
+              </Text>
+            </GridItem>
 
-          <GridItem colSpan={5}>
-            <Heading as="h2" size="lg" borderBottom={"3px solid"}>
-              Ingredients:
-            </Heading>
-            <UnorderedList>
-              {result.ingredients.map((ingredient) => (
-                <Ingredient key={ingredient.name} ingredient={ingredient} />
-              ))}
-            </UnorderedList>
-          </GridItem>
+            <GridItem colSpan={5}>
+              <Heading as="h2" size="lg" borderBottom={"3px solid"}>
+                Ingredients:
+              </Heading>
+              <UnorderedList>
+                {result.ingredients.map((ingredient) => (
+                  <Ingredient key={ingredient.name} ingredient={ingredient} />
+                ))}
+              </UnorderedList>
+            </GridItem>
 
-          <GridItem colSpan={5}>
-            <Heading as="h2" size="lg" borderBottom={"3px solid"}>
-              Method:
-            </Heading>
+            <GridItem colSpan={5}>
+              <Heading as="h2" size="lg" borderBottom={"3px solid"}>
+                Method:
+              </Heading>
 
-            <List>
-              {result.method.map((method, index) => (
-                <Method key={index} method={method} index={index} />
-              ))}
-            </List>
-          </GridItem>
-        </Grid>
-      ))}
-    </Container>
+              <List>
+                {result.method.map((method, index) => (
+                  <Method key={index} method={method} index={index} />
+                ))}
+              </List>
+            </GridItem>
+          </Grid>
+        ))}
+      </Container>
+    </Suspense>
   );
 }
 
