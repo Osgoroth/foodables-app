@@ -28,7 +28,7 @@ export default function Recipes() {
 
     // setIsLoading(false);
   );
-  if (!recipes) console.log("recipes not loaded");
+  // if (!recipes) console.log("recipes not loaded");
   return (
     <>
       <SimpleGrid columns={[2, null, 4, 5, 7]} spacing={2.5} m={5}>
